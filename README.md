@@ -18,11 +18,21 @@ import { shallow } from 'enzyme';
 - [Events](https://github.com/arjunu/react-redux-testing-cheatsheet#events)
 - [DOM](https://github.com/arjunu/react-redux-testing-cheatsheet#dom)
 - [Props](https://github.com/arjunu/react-redux-testing-cheatsheet#props)
+- [Reducer](https://github.com/arjunu/react-redux-testing-cheatsheet#reducer)
+- [State](https://github.com/arjunu/react-redux-testing-cheatsheet#state)
 
 # Events
 
 ## Simulate click event
 
+```javascript
+const wrapper = shallow(<SomeComponent />);
+
+//mock event if event is accessed
+const event = { preventDefault: jest.fn() };
+wrapper.find('button').simulate('click', event);
+expect(event.preventDefault.mock.calls.length).toBe(1);
+```
 
 # DOM
 
@@ -33,7 +43,7 @@ const wrapper = shallow(<SomeComponent />);
 expect(wrapper.find('ChildElementOrComponent').length).toBe(1);
 
 //attribute selector
-expect(wrapper.find(`input[type='submit'`).length).toBe(1);
+expect(wrapper.find(`input[type='submit']`).length).toBe(1);
 ```
 
 # Props
@@ -56,6 +66,18 @@ expect(propFunction.mock.calls[0][0]).toEqual(arg);
 ```javascript
 const wrapper = shallow(<SomeComponent />);
 wrapper.instance().componentFunction();
+```
+
+# Reducer
+
+## Test reducer (action effect on store)
+
+```javascript
+const state = { ... };
+const expectedState = { ... };
+const payload = { ... };
+const action = actionCreator(payload);
+expect(reducer(state, action).toEqual(expectedState);
 ```
 
 # State
