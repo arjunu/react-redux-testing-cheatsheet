@@ -1,4 +1,4 @@
-# react-redux-testing-cheatsheet
+# React Redux Testing Cheatsheet (not complete)
 
 This cheatsheet uses the following stack
 1. [React JS](https://github.com/facebook/react)
@@ -15,13 +15,13 @@ import { shallow } from 'enzyme';
 ```
 
 # Table of Contents
-Events
-DOM
+- [Events](https://github.com/arjunu/react-redux-testing-cheatsheet#events)
+- [DOM](https://github.com/arjunu/react-redux-testing-cheatsheet#dom)
+- [Props](https://github.com/arjunu/react-redux-testing-cheatsheet#props)
 
 # Events
 
 ## Simulate click event
-
 
 
 # DOM
@@ -31,6 +31,9 @@ DOM
 ```javascript
 const wrapper = shallow(<SomeComponent />);
 expect(wrapper.find('ChildElementOrComponent').length).toBe(1);
+
+//attribute selector
+expect(wrapper.find(`input[type='submit'`).length).toBe(1);
 ```
 
 # Props
@@ -47,4 +50,26 @@ expect(propFunction.mock.calls.length).toBe(1);
 
 //propFunction was called with argument 'arg'
 expect(propFunction.mock.calls[0][0]).toEqual(arg);
+```
+## Call component function
+
+```javascript
+const wrapper = shallow(<SomeComponent />);
+wrapper.instance().componentFunction();
+```
+
+# State
+
+## Check state 
+
+```javascript
+const wrapper = shallow(<SomeComponent />);
+expect(wrapper.state().fruit).toEqual('apple');
+```
+
+## Set state
+
+```javascript
+const wrapper = shallow(<SomeComponent />);
+wrapper.instance().setState({fruit: 'orange'}));
 ```
