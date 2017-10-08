@@ -33,6 +33,14 @@ const event = { preventDefault: jest.fn() };
 wrapper.find('button').simulate('click', event);
 expect(event.preventDefault.mock.calls.length).toBe(1);
 ```
+# Simulate on change event
+
+```javascript
+const wrapper = shallow(<SomeComponent />);
+
+const event = { target: { value: 'user123' } };
+wrapper.find(`input[name='username']`).simulate('change', event);
+```
 
 # DOM
 
