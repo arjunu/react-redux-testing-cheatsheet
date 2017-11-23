@@ -23,7 +23,7 @@ import { shallow } from 'enzyme';
 
 # Events
 
-## Simulate click event
+### Simulate click event
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
@@ -33,7 +33,7 @@ const event = { preventDefault: jest.fn() };
 wrapper.find('button').simulate('click', event);
 expect(event.preventDefault.mock.calls.length).toBe(1);
 ```
-# Simulate on change event
+### Simulate on change event
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
@@ -44,7 +44,7 @@ wrapper.find(`input[name='username']`).simulate('change', event);
 
 # DOM
 
-## Check for an element/component
+### Check for an element/component
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
@@ -56,7 +56,7 @@ expect(wrapper.find(`input[type='submit']`).length).toBe(1);
 
 # Props
 
-## Check if prop function was called
+### Check if prop function was called
 
 ```javascript
 //mock the function
@@ -69,7 +69,15 @@ expect(propFunction.mock.calls.length).toBe(1);
 //propFunction was called with argument 'arg'
 expect(propFunction.mock.calls[0][0]).toEqual(arg);
 ```
-## Call component function
+### Update prop
+
+```javascript
+wrapper.setProps({ name: 'bar' });
+```
+
+http://airbnb.io/enzyme/docs/api/ShallowWrapper/setProps.html
+
+### Call component function
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
@@ -78,7 +86,7 @@ wrapper.instance().componentFunction();
 
 # Reducer
 
-## Test reducer (action effect on store)
+### Test reducer (action effect on store)
 
 ```javascript
 const state = { ... };
@@ -90,14 +98,14 @@ expect(reducer(state, action).toEqual(expectedState);
 
 # State
 
-## Check state 
+### Check state 
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
 expect(wrapper.state().fruit).toEqual('apple');
 ```
 
-## Set state
+### Set state
 
 ```javascript
 const wrapper = shallow(<SomeComponent />);
