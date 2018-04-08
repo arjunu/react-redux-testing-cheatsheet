@@ -1,4 +1,4 @@
-# React Redux Testing Cheatsheet (not complete)
+# React Redux Testing Cheatsheet (WIP)
 
 This cheatsheet uses the following stack
 1. [React JS](https://github.com/facebook/react)
@@ -12,6 +12,8 @@ This cheatsheet uses the following stack
 ```javascript
 import React from 'react';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer'; // for jest snapshot
+import toJson from 'enzyme-to-json'; // for enzyme snapshot
 ```
 
 # Table of Contents
@@ -19,6 +21,7 @@ import { shallow } from 'enzyme';
 - [DOM](https://github.com/arjunu/react-redux-testing-cheatsheet#dom)
 - [Props](https://github.com/arjunu/react-redux-testing-cheatsheet#props)
 - [Reducer](https://github.com/arjunu/react-redux-testing-cheatsheet#reducer)
+- [Snapshot](https://github.com/arjunu/react-redux-testing-cheatsheet#snapshot)
 - [State](https://github.com/arjunu/react-redux-testing-cheatsheet#state)
 
 # Events
@@ -94,6 +97,21 @@ const expectedState = { ... };
 const payload = { ... };
 const action = actionCreator(payload);
 expect(reducer(state, action).toEqual(expectedState);
+```
+# Snapshot
+
+### Enzyme snapshot (for container components)
+
+```javascript
+const wrapper = shallow(<Component {...props}></Component>);
+expect(toJson(wrapper)).toMatchSnapshot();
+```
+
+### Jest snapshot (for dumb components)
+
+```javascript
+const tree = renderer.create(<Component {...props}/>).toJSON();
+expect(tree).toMatchSnapshot();
 ```
 
 # State
