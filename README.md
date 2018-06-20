@@ -100,14 +100,14 @@ expect(reducer(state, action).toEqual(expectedState);
 ```
 # Snapshot
 
-### Enzyme snapshot (for container components)
+### Deep Snapshot 
 
 ```javascript
 const wrapper = shallow(<Component {...props}></Component>);
 expect(toJson(wrapper)).toMatchSnapshot();
 ```
 
-### Jest snapshot (for dumb components)
+### Jest snapshot (shallow)
 
 ```javascript
 const tree = renderer.create(<Component {...props}/>).toJSON();
@@ -121,6 +121,20 @@ expect(tree).toMatchSnapshot();
 ```javascript
 const wrapper = shallow(<SomeComponent />);
 expect(wrapper.state().fruit).toEqual('apple');
+```
+
+### Check asynchronously changed state 
+
+```javascript
+test('', done => {
+  const wrapper = shallow(<SomeComponent />);
+  // do something that changes state in an async method
+  process.nextTick(() => {
+    wrapper.update();
+    expect(wrapper.state().fruit).toEqual('apple');
+    done();
+  });
+});
 ```
 
 ### Set state
