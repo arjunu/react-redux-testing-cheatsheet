@@ -23,6 +23,7 @@ import toJson from 'enzyme-to-json'; // for enzyme snapshot
 - [Reducer](https://github.com/arjunu/react-redux-testing-cheatsheet#reducer)
 - [Snapshot](https://github.com/arjunu/react-redux-testing-cheatsheet#snapshot)
 - [State](https://github.com/arjunu/react-redux-testing-cheatsheet#state)
+- [Timers](https://github.com/arjunu/react-redux-testing-cheatsheet#timers)
 
 # Events
 
@@ -100,14 +101,14 @@ expect(reducer(state, action).toEqual(expectedState);
 ```
 # Snapshot
 
-### Deep Snapshot 
+### Jest snapshot (shallow)
 
 ```javascript
 const wrapper = shallow(<Component {...props}></Component>);
 expect(toJson(wrapper)).toMatchSnapshot();
 ```
 
-### Jest snapshot (shallow)
+### Deep Snapshot 
 
 ```javascript
 const tree = renderer.create(<Component {...props}/>).toJSON();
@@ -142,4 +143,19 @@ test('', done => {
 ```javascript
 const wrapper = shallow(<SomeComponent />);
 wrapper.instance().setState({fruit: 'orange'}));
+```
+
+# Timers
+
+### Post timeout execution 
+
+```javascript
+setInterval(() => this.setState({ flag: true }), 100);
+
+jest.useFakeTimers();
+test('', () => {
+  jest.runTimersToTime(100);
+  wrapper.update();
+  expect(wrapper.state().flag).toEqual(true);
+});
 ```
