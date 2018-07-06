@@ -58,6 +58,17 @@ expect(wrapper.find('ChildElementOrComponent').length).toBe(1);
 expect(wrapper.find(`input[type='submit']`).length).toBe(1);
 ```
 
+### Check for focus
+
+```javascript
+const wrapper = mount(<SomeComponent />);
+const element = wrapper.instance().componentInstanceVariableHoldingTheRef;
+spyOn(element, 'focus');
+// call code that triggers focus
+// ...
+expect(element.focus).toHaveBeenCalledTimes(1);
+```
+
 # Props
 
 ### Check if prop function was called
