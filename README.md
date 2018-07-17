@@ -19,6 +19,7 @@ import toJson from 'enzyme-to-json'; // for enzyme snapshot
 # Table of Contents
 - [Events](https://github.com/arjunu/react-redux-testing-cheatsheet#events)
 - [DOM](https://github.com/arjunu/react-redux-testing-cheatsheet#dom)
+- [Mocks](https://github.com/arjunu/react-redux-testing-cheatsheet#mocks)
 - [Props](https://github.com/arjunu/react-redux-testing-cheatsheet#props)
 - [Reducer](https://github.com/arjunu/react-redux-testing-cheatsheet#reducer)
 - [Snapshot](https://github.com/arjunu/react-redux-testing-cheatsheet#snapshot)
@@ -67,6 +68,33 @@ spyOn(element, 'focus');
 // call code that triggers focus
 // ...
 expect(element.focus).toHaveBeenCalledTimes(1);
+```
+# Mocks
+
+### Mock named import
+
+```javascript
+// foosModule.js
+export const foo = () => {...}
+
+// fooConsumerModule.js
+import { foo } from './module1.js';
+export const fooConsumer = () => foo();
+
+// test.js 
+import fooConsumer from './fooConsumerModule.js';
+// import and mock the implementation
+const module = require('./module1.js');
+module.foo = () => 42;
+expect(fooConsumer()).toEqual(42);
+```
+
+### Mock module
+
+```javascript
+jest.mock('./foo');
+const foo = require('./foo');
+foo.mockImplementation(() => 42);
 ```
 
 # Props
