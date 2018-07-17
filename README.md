@@ -1,4 +1,4 @@
-# React Redux Testing Cheatsheet (WIP)
+# React Redux Testing Cheatsheet
 
 This cheatsheet uses the following stack
 1. [React JS](https://github.com/facebook/react)
