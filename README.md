@@ -78,13 +78,13 @@ expect(element.focus).toHaveBeenCalledTimes(1);
 export const foo = () => {...}
 
 // fooConsumerModule.js
-import { foo } from './module1.js';
+import { foo } from './foosModule.js';
 export const fooConsumer = () => foo();
 
 // test.js 
 import fooConsumer from './fooConsumerModule.js';
 // import and mock the implementation
-const module = require('./module1.js');
+const module = require('./foosModule.js');
 module.foo = () => 42;
 expect(fooConsumer()).toEqual(42);
 ```
